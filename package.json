@@ -1,0 +1,29 @@
+{
+  "name": "fitbit-music-clock",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@fitbit/sdk": "~6.1.0",
+    "@fitbit/sdk-cli": "^1.7.3",
+    "fitbit-sdk-types": "^7.0.5"
+  },
+  "fitbit": {
+    "appUUID": "b2d5d58d-664c-4a7e-9e4e-20408d54af00",
+    "appType": "clockface",
+    "appDisplayName": "Fitbit Music Clock",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "#ffffff",
+    "requestedPermissions": [ "access_heart_rate" ],
+    "buildTargets": [
+      "atlas",
+      "vulcan"
+    ],
+    "i18n": {},
+    "defaultLanguage": "en-US"
+  },
+  "scripts": {
+    "build": "fitbit-build",
+    "debug": "fitbit"
+  }
+}

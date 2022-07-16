@@ -1,0 +1,11 @@
+<svg>
+  <text id="dayOfWeek" font-family="System-Bold" font-size="20"
+    fill="whitesmoke" width="100%" x="50%" y="60" text-anchor="middle">Monday</text>
+  <line x1="0" x2="100%" y1="93" y2="93" fill="whitesmoke" stroke-width="2" />
+  <line x1="0" x2="100%" y1="123" y2="123" fill="whitesmoke" stroke-width="2" />
+  <line x1="0" x2="100%" y1="153" y2="153" fill="whitesmoke" stroke-width="2" />
+  <line x1="0" x2="100%" y1="183" y2="183" fill="whitesmoke" stroke-width="2" />
+  <line x1="0" x2="100%" y1="213" y2="213" fill="whitesmoke" stroke-width="2" />
+  <line x1="0" x2="100%" y1="243" y2="243" fill="whitesmoke" stroke-width="2" />
+  <image x="4" y="70" width="89" height="228" href="treble-white.png" />
+</svg>
