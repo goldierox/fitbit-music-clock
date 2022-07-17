@@ -1,6 +1,6 @@
 import clock from "clock";
 import { TimeUpdate } from "./TimeUpdate";
-export class Clock {
+export default class Clock {
     public clockCallback: (timeUpdate: TimeUpdate) => void;
 
     constructor() {
@@ -8,6 +8,7 @@ export class Clock {
         // Update the clock every tick event
         clock.addEventListener("tick", this.updateClock);
     }
+
     private updateClock = () => {
         if (!this.clockCallback) {
             return;
@@ -16,4 +17,3 @@ export class Clock {
         this.clockCallback(new TimeUpdate(new Date()));
     }
 }
-export default Clock;
