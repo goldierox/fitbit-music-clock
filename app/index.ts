@@ -6,6 +6,7 @@ import { today } from "user-activity";
 
 const dayOfWeekElement = document.getElementById("dayOfWeek") as TextElement;
 const heartRateElement = document.getElementById("heartRate") as TextElement;
+const dateElement = document.getElementById("date") as TextElement;
 const stepCount = document.getElementById("stepCount") as TextElement;
 
 const updateStepCount = () => {
@@ -18,6 +19,7 @@ const clock = new Clock();
 clock.clockCallback = (t) => {
     console.log("Updating day of week: " + t.dayOfWeek);
     dayOfWeekElement.text = t.dayOfWeek;
+    dateElement.text = t.dateString;
 
     updateStepCount();
 };

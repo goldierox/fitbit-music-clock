@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 export class TimeUpdate {
     private _date: Date;
     private _dayNames: string[] = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -12,5 +13,14 @@ export class TimeUpdate {
         }
 
         return this._dayNames[this._date.getDay()];
+    }
+
+    public get dateString(): string {
+        if (!this._date) {
+            return null;
+        }
+
+        // TODO explore caching this 
+        return dayjs(this._date).format("MMM DD");
     }
 }

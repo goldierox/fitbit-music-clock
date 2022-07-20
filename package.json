@@ -32,5 +32,8 @@
     "build": "fitbit-build",
     "debug": "fitbit",
     "test": "jest"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.4"
   }
 }
