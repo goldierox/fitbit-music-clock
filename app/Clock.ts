@@ -5,7 +5,6 @@ export default class Clock {
 
     constructor() {
         clock.granularity = "minutes";
-        // Update the clock every tick event
         clock.addEventListener("tick", this.updateClock);
     }
 

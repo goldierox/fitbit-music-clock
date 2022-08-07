@@ -14,6 +14,11 @@
   <line x1="0" x2="100%" y1="208" y2="208" fill="whitesmoke" stroke-width="2" />
   <image x="4" y="102" width="55" height="140" href="treble-white.png" />
 
+  <image id="hourTensImage" x="35" width="150" height="150"/>
+  <image id="hourOnesImage" x="90" width="150" height="150"/>
+  <image id="minuteTensImage" x="145" width="150" height="150" />
+  <image id="minuteOnesImage" x="200" width="150" height="150" />
+
   <text id="stepCount" font-family="System-Regular" font-size="14" fill="whitesmoke"
     x="50%" y="85%" text-length="10" text-anchor="middle" />
 </svg>

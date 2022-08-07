@@ -20,7 +20,23 @@ export class TimeUpdate {
             return null;
         }
 
-        // TODO explore caching this 
+        // TODO explore caching this
         return dayjs(this._date).format("MMM DD");
+    }
+
+    public get hours(): number {
+        if (!this._date) {
+            return null;
+        }
+
+        return this._date.getHours();
+    }
+
+    public get minutes(): number {
+        if (!this._date) {
+            return null;
+        }
+
+        return this._date.getMinutes();
     }
 }
