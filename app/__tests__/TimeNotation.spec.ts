@@ -1,14 +1,5 @@
 import TimeNotation from "../TimeNotation";
-import { NoteType, TimeNote } from "../TimeNote";
-
-test('midnight is one note', () => {
-    let midnight = new TimeNotation(0, 0);
-    expect(midnight.hourNotes.length).toEqual(1);
-    expect(midnight.minuteNotes.length).toEqual(0);
-
-    expect(midnight.hourNotes[0].noteType).toEqual(NoteType.WHOLE_REST);
-    expect(midnight.hourNotes[0].unitValue).toEqual(0);
-});
+import { NoteType } from "../TimeNote";
 
 test('12:30am is half rest, quarter note, quarter rest', () => {
     let twelveThirty = new TimeNotation(0, 30);

@@ -2,9 +2,9 @@ export class TimeNote {
     unitValue: number;
     noteType: NoteType;
 
-    private startingPositionBelowB: number = 125;
-    private startingPositionBAndAbove: number = 121;
-    private noteMultiplier: number = 9.6;
+    private startingPositionBelowB: number = 155;
+    private startingPositionBAndAbove: number = 155;
+    private noteMultiplier: number = 9.5;
 
     constructor(noteType: NoteType, unitValue: number) {
         this.noteType = noteType;
@@ -21,9 +21,8 @@ export class TimeNote {
                     return this.startingPositionBAndAbove - (this.unitValue - 7) * this.noteMultiplier;
                 }
             default:
-                return 0;
+                return 125;
         }
-        return 0;
     }
 
     public get imageHref(): string {
@@ -38,18 +37,14 @@ export class TimeNote {
             return "above-b.png";
         }
         else if (this.noteType === NoteType.QUARTER_REST) {
-            return null; // TODO
-        }
-        else if( this.noteType === NoteType.HALF_REST) {
-            return null; // TODO
+            return "quarter-rest.png";
         }
 
-        return null; // TODO whole rest
+        return "half-rest.png";
     }
 }
 
 export enum NoteType {
-    WHOLE_REST,
     HALF_REST,
     QUARTER_REST,
     QUARTER_NOTE

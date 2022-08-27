@@ -4,6 +4,7 @@ import { me as appbit } from "appbit";
 import { HeartRateSensor } from "heart-rate";
 import { today } from "user-activity";
 import { NoteType, TimeNote } from "./TimeNote";
+import { min } from "scientific";
 
 const dayOfWeekElement = document.getElementById("dayOfWeek") as TextElement;
 const heartRateElement = document.getElementById("heartRate") as TextElement;
@@ -14,6 +15,7 @@ const hourTensImage = document.getElementById("hourTensImage") as ImageElement;
 const hourOnesImage = document.getElementById("hourOnesImage") as ImageElement;
 const minuteTensImage = document.getElementById("minuteTensImage") as ImageElement;
 const minuteOnesImage = document.getElementById("minuteOnesImage") as ImageElement;
+const wholeRest = document.getElementById("wholeRest") as RectElement;
 
 const updateStepCount = () => {
   if (appbit.permissions.granted("access_activity")) {
@@ -22,18 +24,27 @@ const updateStepCount = () => {
 };
 
 const updateTimeNotes = (hours: number, minutes: number) => {
+  hours = 0
+  minutes = 30
   console.log(`Updating time: hours = ${hours}, minutes = ${minutes}`);
+
+  const noteImages = [hourOnesImage, hourTensImage, minuteTensImage, minuteOnesImage];
+  
+  // Midnight special case
+  if (hours === 0 && minutes === 0) {
+    noteImages.forEach(x => x.style.visibility = "hidden");
+    wholeRest.style.visibility = "visible";
+    return;
+  }
+  else {
+    wholeRest.style.visibility = "hidden";
+  }
   
   // TODO extract to util
   const hoursTens: number = Math.floor(hours / 10.0);
   let hourTensNoteType: NoteType = NoteType.QUARTER_NOTE;
   if (hours === 0) {
-    if (minutes === 0) {
-      hourTensNoteType = NoteType.WHOLE_REST;
-    }
-    else {
       hourTensNoteType = NoteType.HALF_REST;
-    }
   }
   else if (hoursTens === 0) {
     hourTensNoteType = NoteType.QUARTER_REST;
@@ -46,7 +57,7 @@ const updateTimeNotes = (hours: number, minutes: number) => {
   // TODO extract to util
   const hoursOnes: number = hours % 10;
   let hourOnesNoteType: NoteType = NoteType.QUARTER_NOTE;
-  if (hourTensNoteType === NoteType.HALF_REST || hourTensNoteType === NoteType.WHOLE_REST) {
+  if (hourTensNoteType === NoteType.HALF_REST) {
     hourOnesNoteType = null; // TODO is null the right way to capturing hiding?
   }
   else if (hoursOnes === 0) {
@@ -66,10 +77,7 @@ const updateTimeNotes = (hours: number, minutes: number) => {
   // TODO extract to util
   const minutesTens: number = Math.floor(minutes / 10.0);
   let minuteTensNoteType: NoteType = NoteType.QUARTER_NOTE;
-  if (hourTensNoteType === NoteType.WHOLE_REST) {
-    minuteTensNoteType = null;
-  }
-  else if (minutes === 0) {
+  if (minutes === 0) {
     minuteTensNoteType = NoteType.HALF_REST;
   }
   else if (minutesTens === 0) {
@@ -89,7 +97,7 @@ const updateTimeNotes = (hours: number, minutes: number) => {
   // TODO extract to util
   const minuteOnes: number = minutes % 10;
   let minuteOnesNoteType: NoteType = NoteType.QUARTER_NOTE;
-  if (minuteTensNoteType === NoteType.HALF_REST || hourTensNoteType === NoteType.WHOLE_REST) {
+  if (minuteTensNoteType === NoteType.HALF_REST) {
     minuteOnesNoteType = null; // TODO is null the right way to capturing hiding?
   }
   else if (minuteOnes === 0) {
