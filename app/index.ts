@@ -4,7 +4,6 @@ import { me as appbit } from "appbit";
 import { HeartRateSensor } from "heart-rate";
 import { today } from "user-activity";
 import { NoteType, TimeNote } from "./TimeNote";
-import { min } from "scientific";
 
 const dayOfWeekElement = document.getElementById("dayOfWeek") as TextElement;
 const heartRateElement = document.getElementById("heartRate") as TextElement;
@@ -16,6 +15,7 @@ const hourOnesImage = document.getElementById("hourOnesImage") as ImageElement;
 const minuteTensImage = document.getElementById("minuteTensImage") as ImageElement;
 const minuteOnesImage = document.getElementById("minuteOnesImage") as ImageElement;
 const wholeRest = document.getElementById("wholeRest") as RectElement;
+const halfRest = document.getElementById("halfRest") as RectElement;
 
 const updateStepCount = () => {
   if (appbit.permissions.granted("access_activity")) {
@@ -25,19 +25,18 @@ const updateStepCount = () => {
 
 const updateTimeNotes = (hours: number, minutes: number) => {
   hours = 0
-  minutes = 30
+  minutes = 0
   console.log(`Updating time: hours = ${hours}, minutes = ${minutes}`);
 
   const noteImages = [hourOnesImage, hourTensImage, minuteTensImage, minuteOnesImage];
+  wholeRest.style.visibility = "hidden";
+  halfRest.style.visibility = "hidden";
   
   // Midnight special case
   if (hours === 0 && minutes === 0) {
     noteImages.forEach(x => x.style.visibility = "hidden");
     wholeRest.style.visibility = "visible";
     return;
-  }
-  else {
-    wholeRest.style.visibility = "hidden";
   }
   
   // TODO extract to util
@@ -51,8 +50,17 @@ const updateTimeNotes = (hours: number, minutes: number) => {
   }
 
   const hoursTensTimeNote = new TimeNote(hourTensNoteType, hoursTens);
-  hourTensImage.href = hoursTensTimeNote.imageHref;
-  hourTensImage.y = hoursTensTimeNote.noteYPosition
+  if (hourTensNoteType == NoteType.HALF_REST) {
+    halfRest.style.visibility = "visible";
+    halfRest.x = 120;
+    hourTensImage.style.visibility = "hidden";
+  } else {
+    hourTensImage.href = hoursTensTimeNote.imageHref;
+    hourTensImage.y = hoursTensTimeNote.noteYPosition;
+    halfRest.style.visibility = "hidden";
+    hourTensImage.style.visibility = "visible";
+  }
+
 
   // TODO extract to util
   const hoursOnes: number = hours % 10;
@@ -84,8 +92,12 @@ const updateTimeNotes = (hours: number, minutes: number) => {
     minuteTensNoteType = NoteType.QUARTER_REST;
   }
 
-  if (minuteTensNoteType === null) {
+  if (minuteTensNoteType === null || minuteTensNoteType === NoteType.HALF_REST) {
     minuteTensImage.style.visibility = "hidden";
+    if (minuteTensNoteType === NoteType.HALF_REST) {
+      halfRest.x = 240;
+      halfRest.style.visibility = "visible";
+    }
   }
   else {
     const minuteTensTimeNote = new TimeNote(minuteTensNoteType, minutesTens);

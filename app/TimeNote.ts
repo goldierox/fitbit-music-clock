@@ -40,11 +40,12 @@ export class TimeNote {
             return "quarter-rest.png";
         }
 
-        return "half-rest.png";
+        return null;
     }
 }
 
 export enum NoteType {
+    WHOLE_REST,
     HALF_REST,
     QUARTER_REST,
     QUARTER_NOTE
